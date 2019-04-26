@@ -15,7 +15,7 @@ Docker image for Binance Full Node
 
 ### Run interactively
 
-
+`docker run --rm -it varnav/binance-node-docker`
 
 ### Run as daemon
 
@@ -30,7 +30,7 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
 
 ### Update
 
-`docker stop binance-testnet && docker rm binance-testnet` and then run again, data and configs inside `/opt/binance-testnet-data` is preserved.
+`docker stop binance-testnet && docker rm binance-testnet` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.
 
 ## Prod
 
@@ -41,5 +41,4 @@ ufw allow 27146/tcp
 docker run -d --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node-docker
 ```
 
-Both can be run at once, use `-p 27147:27147` for publishing RPC port where you would like.
-
+You can run both at once, use `-p 27147:27147` for publishing RPC port where you would like.
