@@ -22,8 +22,9 @@ COPY ./bin /usr/local/bin
 VOLUME ${BNCHOME}
 
 # RPC service listen on port 27147 and P2P service listens on port 27146 by default.
+# Prometheus is enabled on port 26660 by default, and the endpoint is /metrics.
 
-EXPOSE 27146 27147
+EXPOSE 27146 27147 26660
 
 RUN chmod +x /usr/local/bin/*.sh
 
