@@ -28,6 +28,11 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
 
 `docker logs -f binance-testnet`
 
+### Get into CLI
+
+ ```docker exec -it binance-devel /bin/bash
+ bnbcli version```
+
 ### Update
 
 `docker stop binance-testnet && docker rm binance-testnet` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.
@@ -42,3 +47,12 @@ docker run -d --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod
 ```
 
 You can run both at once, use `-p 27147:27147` for publishing RPC port where you would like.
+
+## Devel
+
+### Run and get access to CLI
+
+```docker run --rm -d --name binance-devel varnav/binance-node-docker:devel
+ docker exec -it binance-devel /bin/bash
+ bnbcli version
+```
