@@ -30,8 +30,10 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
 
 ### Get into CLI
 
- ```docker exec -it binance-devel /bin/bash
- bnbcli version```
+ ```
+ docker exec -it binance-devel /bin/bash
+ bnbcli version
+ ```
 
 ### Update
 
@@ -52,7 +54,8 @@ You can run both at once, use `-p 27147:27147` for publishing RPC port where you
 
 ### Run and get access to CLI
 
-```docker run --rm -d --name binance-devel varnav/binance-node-docker:devel
- docker exec -it binance-devel /bin/bash
- bnbcli version
+```
+docker run --rm -d --name binance-devel varnav binance-node-docker:devel
+docker exec -it binance-devel /bin/bash
+bnbcli version
 ```
