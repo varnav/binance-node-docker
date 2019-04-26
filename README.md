@@ -5,7 +5,7 @@ Docker image for Binance full node
 
 `docker build . -t varnav/binance-node`
 
-## Running:
+## Running
 
 ```
 ufw allow 27146/tcp

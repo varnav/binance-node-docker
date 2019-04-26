@@ -23,8 +23,7 @@ VOLUME ${BNCHOME}
 
 # RPC service listen on port 27147 and P2P service listens on port 27146 by default.
 
-EXPOSE 27146
-EXPOSE 27147
+EXPOSE 27146 27147
 
 RUN chmod +x /usr/local/bin/*.sh
 
