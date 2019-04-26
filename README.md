@@ -1,6 +1,9 @@
 # binance-node-docker
 Docker image for Binance full node
 
+[![Docker Stars](https://img.shields.io/docker/stars/varnav/binance-node-docker.svg)](https://hub.docker.com/r/varnav/binance-node-docker)
+[![Docker Pulls](https://img.shields.io/docker/pulls/varnav/binance-node-docker.svg)](https://hub.docker.com/r/varnav/binance-node-docker)
+
 ## Building
 
 `docker build . -t varnav/binance-node`
