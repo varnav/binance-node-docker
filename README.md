@@ -1,5 +1,5 @@
 # binance-node-docker
-Docker image for Binance full node
+Docker image for [Binance full node](https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain)
 
 [![Docker Stars](https://img.shields.io/docker/stars/varnav/binance-node-docker.svg)](https://hub.docker.com/r/varnav/binance-node-docker)
 [![Docker Pulls](https://img.shields.io/docker/pulls/varnav/binance-node-docker.svg)](https://hub.docker.com/r/varnav/binance-node-docker)
