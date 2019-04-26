@@ -9,5 +9,7 @@ Docker image for Binance full node
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance -v binance-data:/root/.bnbchaind/ -p 27146:27146 -p 27147:27147 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node
+docker run -d --name binance -v /opt/binance-config:/root/.bnbchaind/config/ -v binance-data:/root/.bnbchaind/data/ -e "BVER=0.5.8" -e "BNET=testnet" -p 27146:27146 -p 27147:27147 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node
 ```
+
+You can use `prod` instead of `testnet`
