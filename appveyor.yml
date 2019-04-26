@@ -1,6 +1,0 @@
-image: hadolint/hadolint
-
-test_script:
-- hadolint --ignore DL3003 --ignore DL3008 Dockerfile 
-
-build: off
