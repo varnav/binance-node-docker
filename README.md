@@ -9,24 +9,24 @@ Docker image for Binance Full Node
 
 ## Building
 
-`docker build . -t varnav/binance-node`
+`docker build . -t varnav/binance-node-docker`
 
 ## Testnet
 
-### Run
+### Run interactively
+
+
+
+### Run as daemon
 
 ```
 ufw allow 26656/tcp
-docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchaind -e "BNET=testnet" -p 26656:26656 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node
+docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchaind -e "BNET=testnet" -p 26656:26656 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node-docker
 ```
 
 ### Check logs
 
 `docker logs -f binance-testnet`
-
-### Monitor
-
-[Prometheus](https://prometheus.io/) is enabled on port 26660 by default, and the endpoint is /metrics.
 
 ### Update
 
@@ -38,7 +38,7 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node
+docker run -d --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node-docker
 ```
 
 Both can be run at once, use `-p 27147:27147` for publishing RPC port where you would like.
