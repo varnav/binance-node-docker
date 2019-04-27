@@ -27,6 +27,4 @@ VOLUME ${BNCHOME}
 
 EXPOSE 27146 27147 26660
 
-RUN chmod +x /usr/local/bin/*.sh
-
 ENTRYPOINT ["entrypoint.sh"]
