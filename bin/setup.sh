@@ -5,7 +5,11 @@ mkdir -p ${BNCHOME}/config/
 cp node-binary/fullnode/${BNET}/${BVER}/config/* ${BNCHOME}/config/
 fi
 
-export PATH=${PATH}:/node-binary/cli/${BNET}/${BVER}/linux/
+cp node-binary/fullnode/${BNET}/${BVER}/linux/bnbchaind /usr/local/bin/
+cp node-binary/cli/${BNET}/${BVER}/linux/bnbcli /usr/local/bin/
+
+chmod +x /usr/local/bin/bnbchaind
+chmod +x /usr/local/bin/bnbcli
 
 # Turn on console logging
 
