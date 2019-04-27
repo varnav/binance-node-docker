@@ -51,7 +51,7 @@ You can run both testnet and prod at once, use `-p 27147:27147` for publishing R
 ### Run and get access to CLI
 
 ```
-docker run --rm -d --name binance-devel varnav binance-node-docker:devel
+docker run --rm -d --name binance-devel varnav/binance-node-docker:devel
 docker exec -it binance-devel /bin/bash
 bnbcli version
 ```
