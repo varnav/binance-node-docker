@@ -26,7 +26,9 @@ And that's it. You now have Docker installed!
 
 Ok, and if you want to run node in background with production network, use this command:
 
-`docker run -d --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod" -p 27146:27146 -p 127.0.0.1:27147:27147 --security-opt no-new-privileges varnav/binance-node-docker`
+`docker run -d --rm --name binance -v /opt/binance-data:/root/.bnbchaind -e "BNET=prod" -p 27146:27146 -p 127.0.0.1:27147:27147 --security-opt no-new-privileges varnav/binance-node-docker`
+
+All data and config files will be stored in `/opt/binance-data/`, while everything else will be running inside container and will be automatically deleted if you stop the container with `docker stop binance`. Data and configs will be, of course, preserved - and you will be easily able to run container again using command above.
 
 To get into console and use `bnbcli` run this:
 

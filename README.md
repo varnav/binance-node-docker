@@ -41,7 +41,7 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
 
 ### Update
 
-`docker stop binance-testnet && docker rm binance-testnet` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.
+`docker stop binance-testnet && docker rm binance-testnet`, pull fresh image with `docker pull varnav/binance-node-docker` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.
 
 ## Prod
 
