@@ -37,6 +37,8 @@ COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/
 COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
 COPY ./bin/*.sh /usr/local/bin/
 
+RUN chmod +x /usr/local/bin/*.sh
+
 VOLUME ${BNCHOME}
 
 # RPC service listen on port 27147 and P2P service listens on port 27146 by default.
