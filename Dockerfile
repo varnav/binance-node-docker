@@ -15,7 +15,8 @@ RUN set -ex \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget git \
 	&& git clone --depth 1 https://github.com/binance-chain/node-binary.git \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& apt-get purge -y --auto-remove ca-certificates wget git
+	&& apt-get purge -y --auto-remove ca-certificates wget git \
+	&& rm -rf node-binary/.git
 
 COPY ./bin /usr/local/bin
 
