@@ -21,7 +21,7 @@ RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
 
 # Final stage
 
-FROM alpine:3.9
+FROM ubuntu:18.04
 
 # UPDATE ME when new version is out !!!!
 ENV BVER=0.5.8
