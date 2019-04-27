@@ -11,4 +11,4 @@ install:
     && chmod 700 ${HADOLINT}
 script:
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
-  - docker build . -t varnav/binance-node-docker
+  - docker build --no-cache . -t varnav/binance-node-docker

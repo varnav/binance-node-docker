@@ -18,9 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certific
 RUN	git clone --depth 1 https://github.com/varnav/node-binary.git
 RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
 && upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
-&& /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
+&& upx /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
 && upx /node-binary/fullnode/prod/${BVER}/linux/bnbchaind
-
 
 # Final stage
 
