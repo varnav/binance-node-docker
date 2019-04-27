@@ -35,3 +35,7 @@ To get into console and use `bnbcli` run this:
 And to see logs run this:
 
 `docker logs -f binance-testnet`
+
+## Is all this free?
+
+Yes, all this is free software.
