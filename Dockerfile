@@ -7,11 +7,7 @@
 FROM ubuntu:18.04 as builder
 
 ARG DEBIAN_FRONTEND=noninteractive
-
-ENV BVER=0.5.8
-ENV BNET=testnet
-#ENV BNET=prod
-ENV BNCHOME=/root/.bnbchaind
+ARG BVER=0.5.8
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
 #RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
@@ -24,6 +20,13 @@ RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
 # Final stage
 
 FROM ubuntu:18.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV BVER=0.5.8
+ENV BNET=testnet
+#ENV BNET=prod
+ENV BNCHOME=/root/.bnbchaind
 
 COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/bnbcli /node-binary/cli/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/testnet/${BVER}/linux/
