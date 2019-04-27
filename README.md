@@ -56,9 +56,9 @@ docker exec -it binance-devel /bin/bash
 bnbcli version
 ```
 
-## Building locally
+## Building devel branch locally
 
 ```
-https://github.com/varnav/binance-node-docker.git
-docker build . -t varnav/binance-node-docker
+git clone --branch=devel https://github.com/varnav/binance-node-docker.git
+cd binance-node-docker && docker build . -t varnav/binance-node-docker:devel
 ```

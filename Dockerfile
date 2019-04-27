@@ -2,11 +2,13 @@
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
 # MIT license
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Build stage
 
 FROM ubuntu:18.04 as builder
 
-ARG DEBIAN_FRONTEND=noninteractive
+# UPDATE ME when new version is out !!!!
 ARG BVER=0.5.8
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
@@ -19,10 +21,9 @@ RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
 
 # Final stage
 
-FROM ubuntu:18.04
+FROM alpine:3.9
 
-ARG DEBIAN_FRONTEND=noninteractive
-
+# UPDATE ME when new version is out !!!!
 ENV BVER=0.5.8
 ENV BNET=testnet
 #ENV BNET=prod
