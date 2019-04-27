@@ -2,7 +2,9 @@
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
 # MIT license
 
-FROM ubuntu:18.04
+# Build stage
+
+FROM ubuntu:18.04 as builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -11,14 +13,25 @@ ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/root/.bnbchaind
 
-RUN set -ex \
-	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget git \
-	&& git clone --depth 1 https://github.com/binance-chain/node-binary.git \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& apt-get purge -y --auto-remove ca-certificates wget git \
-	&& rm -rf node-binary/.git
+RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git \
+RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git \
+RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
+&& upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
+&& /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
+&& upx /node-binary/fullnode/prod/${BVER}/linux/bnbchaind
 
-COPY ./bin /usr/local/bin
+
+# Final stage
+
+FROM ubuntu:18.04
+
+COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/bnbcli /node-binary/cli/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/fullnode/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/fullnode/testnet/${BVER}/config/
+COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
+COPY ./bin/*.sh /usr/local/bin/
 
 VOLUME ${BNCHOME}
 

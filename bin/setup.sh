@@ -2,7 +2,7 @@
 
 if [ ! -d "${BNCHOME}/config/" ]; then
 mkdir -p ${BNCHOME}/config/
-cp node-binary/fullnode/${BNET}/${BVER}/config/* ${BNCHOME}/config/
+cp /node-binary/fullnode/${BNET}/${BVER}/config/* ${BNCHOME}/config/
 fi
 
 cp node-binary/fullnode/${BNET}/${BVER}/linux/bnbchaind /usr/local/bin/
