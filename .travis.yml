@@ -15,7 +15,7 @@ script:
   - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node-docker
   - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node-docker
   - sleep 15
-  - docker logs -f binance-testnet
-  - docker logs -f binance
+  - docker logs --tail 50 binance-testnet
+  - docker logs --tail 50 binance
   - docker stop binance-testnet
   - docker stop binance
