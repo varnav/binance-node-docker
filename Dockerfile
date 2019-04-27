@@ -13,8 +13,8 @@ ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/root/.bnbchaind
 
-RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git \
-RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git \
+RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
+RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
 RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
 && upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
 && /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
