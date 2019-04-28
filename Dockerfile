@@ -53,5 +53,4 @@ EXPOSE 27146 27147 26660
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f localhost:27147/status || exit 1
 
-USER bnbchaind
 ENTRYPOINT ["entrypoint.sh"]
