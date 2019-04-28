@@ -38,7 +38,7 @@ COPY ./bin/*.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/*.sh \
 && groupadd --gid 1000 bnbchaind \
-&& useradd --uid 1000 --gid bnbchaind \
+&& useradd --uid 1000 -g bnbchaind bnbchaind \
 && chown -R bnbchaind:bnbchaind /node-binary/ \
 && chown -R bnbchaind:bnbchaind ${BNCHOME}
 
