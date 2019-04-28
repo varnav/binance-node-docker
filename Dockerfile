@@ -37,6 +37,7 @@ COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/ful
 COPY ./bin/*.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/*.sh \
+&& mkdir -p ${BNCHOME}
 && groupadd --gid 1000 bnbchaind \
 && useradd --uid 1000 -g bnbchaind bnbchaind \
 && chown -R bnbchaind:bnbchaind /node-binary/ \
