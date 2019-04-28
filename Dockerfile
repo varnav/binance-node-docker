@@ -26,7 +26,7 @@ FROM ubuntu:18.04
 ENV BVER=0.5.8
 ENV BNET=testnet
 #ENV BNET=prod
-ENV BNCHOME=/root/.bnbchaind
+ENV BNCHOME=/opt/bnbchaind
 
 COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
@@ -37,7 +37,7 @@ COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/ful
 COPY ./bin/*.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/*.sh \
-&& mkdir -p ${BNCHOME}
+&& mkdir -p ${BNCHOME} \
 && groupadd --gid 1000 bnbchaind \
 && useradd --uid 1000 -g bnbchaind bnbchaind \
 && chown -R bnbchaind:bnbchaind /node-binary/ \
