@@ -39,6 +39,8 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/root/.bnbchai
  tbnbcli version
  ```
 
+ use `tbnbcli` for testnet and `bnbcli` for prod
+
 ### Update
 
 `docker stop binance-testnet && docker rm binance-testnet`, pull fresh image with `docker pull varnav/binance-node-docker` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.

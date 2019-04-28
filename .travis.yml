@@ -17,7 +17,7 @@ script:
   - sleep 15
   - docker logs --tail 50 binance-testnet
   - docker logs --tail 50 binance
-  - docker exec -t binance-testnet bnbcli version
-  - docker exec -t binance-testnet bnbcli version
+  - docker exec -t binance-testnet tbnbcli version
+  - docker exec -t binance bnbcli version
   - docker stop binance-testnet
   - docker stop binance

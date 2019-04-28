@@ -14,7 +14,7 @@ ARG BVER=0.5.8
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
 RUN upx /node-binary/cli/testnet/${BVER}/linux/tbnbcli \
-&& upx /node-binary/cli/prod/${BVER}/linux/tbnbcli \
+&& upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
 && upx /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
 && upx /node-binary/fullnode/prod/${BVER}/linux/bnbchaind
 
@@ -29,7 +29,7 @@ ENV BNET=testnet
 ENV BNCHOME=/root/.bnbchaind
 
 COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
-COPY --from=builder /node-binary/cli/prod/${BVER}/linux/tbnbcli /node-binary/cli/prod/${BVER}/linux/
+COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
 COPY --from=builder /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/fullnode/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/prod/${BVER}/linux/
 COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/fullnode/testnet/${BVER}/config/
