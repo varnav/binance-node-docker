@@ -12,9 +12,8 @@ FROM ubuntu:18.04 as builder
 ARG BVER=0.5.8
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
-#RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
-RUN	git clone --depth 1 https://github.com/varnav/node-binary.git
-RUN upx /node-binary/cli/testnet/${BVER}/linux/bnbcli \
+RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
+RUN upx /node-binary/cli/testnet/${BVER}/linux/tbnbcli \
 && upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
 && upx /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
 && upx /node-binary/fullnode/prod/${BVER}/linux/bnbchaind
@@ -29,7 +28,7 @@ ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/root/.bnbchaind
 
-COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/bnbcli /node-binary/cli/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
 COPY --from=builder /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/fullnode/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/prod/${BVER}/linux/
@@ -45,5 +44,8 @@ VOLUME ${BNCHOME}
 # Prometheus is enabled on port 26660 by default, and the endpoint is /metrics.
 
 EXPOSE 27146 27147 26660
+
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f localhost:27147/status || exit 1
 
 ENTRYPOINT ["entrypoint.sh"]
