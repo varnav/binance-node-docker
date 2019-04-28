@@ -36,7 +36,11 @@ COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/
 COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
 COPY ./bin/*.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/*.sh
+RUN chmod +x /usr/local/bin/*.sh \
+&& groupadd --gid 1000 bnbchaind \
+&& useradd --uid 1000 --gid bnbchaind \
+&& chown -R bnbchaind:bnbchaind /node-binary/ \
+&& chown -R bnbchaind:bnbchaind ${BNCHOME}
 
 VOLUME ${BNCHOME}
 
@@ -48,4 +52,5 @@ EXPOSE 27146 27147 26660
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f localhost:27147/status || exit 1
 
+USER bnbchaind
 ENTRYPOINT ["entrypoint.sh"]
