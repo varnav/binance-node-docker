@@ -14,9 +14,12 @@ script:
   - docker build --cache-from varnav/binance-node-docker:$TRAVIS_BRANCH . -t varnav/binance-node-docker
   - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node-docker
   - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node-docker
+  - sleep 5
+  - docker logs --tail 20 binance-testnet | head -n 20
+  - docker logs --tail 20 binance | head -n 20
   - sleep 15
-  - docker logs --tail 50 binance-testnet
-  - docker logs --tail 50 binance
+  - docker logs --tail 20 binance-testnet
+  - docker logs --tail 20 binance
   - docker exec -t binance-testnet tbnbcli version
   - docker exec -t binance bnbcli version
   - docker stop binance-testnet
