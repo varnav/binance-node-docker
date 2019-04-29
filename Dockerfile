@@ -3,6 +3,8 @@
 # MIT license
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG HOST_USER_UID=1000
+ARG HOST_USER_GID=1000
 
 # Build stage
 
@@ -38,8 +40,8 @@ COPY ./bin/*.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/*.sh \
 && mkdir -p ${BNCHOME} \
-&& groupadd bnbchaind \
-&& useradd --no-create-home -g bnbchaind bnbchaind \
+&& groupadd --gid ${HOST_USER_GID} bnbchaind \
+&& useradd --uid ${HOST_USER_UID} --gid ${HOST_USER_GID} --shell /bin/bash --no-create-home bnbchaind
 && chown -R bnbchaind:bnbchaind ${BNCHOME}
 
 VOLUME ${BNCHOME}
