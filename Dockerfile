@@ -39,10 +39,10 @@ COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/ful
 COPY ./bin/*.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/*.sh \
-&& mkdir -p ${BNCHOME} \
-&& groupadd --gid ${HOST_USER_GID} bnbchaind \
-&& useradd --uid ${HOST_USER_UID} --gid ${HOST_USER_GID} --shell /bin/bash --no-create-home bnbchaind \
-&& chown -R bnbchaind:bnbchaind ${BNCHOME}
+&& mkdir -p "${BNCHOME}" \
+&& groupadd --gid "${HOST_USER_GID}" bnbchaind \
+&& useradd --uid "${HOST_USER_UID}" --gid "${HOST_USER_GID}" --shell /bin/bash --no-create-home bnbchaind \
+&& chown -R bnbchaind:bnbchaind "${BNCHOME}"
 
 VOLUME ${BNCHOME}
 
