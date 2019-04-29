@@ -11,7 +11,7 @@ install:
     && chmod 700 ${HADOLINT}
 script:
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
-  - docker build varnav/binance-node-docker:$TRAVIS_BRANCH . -t varnav/binance-node-docker
+  - docker build --from-cache varnav/binance-node-docker:$TRAVIS_BRANCH . -t varnav/binance-node-docker
   - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node-docker
   - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node-docker
   - sleep 15
