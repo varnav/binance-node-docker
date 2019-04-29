@@ -9,7 +9,8 @@ Docker image for Binance Full Node
 
 ### Features:
 
-* Spin up full Binance node with single command. Works for testnet, prod, or both at once.
+* Spin up full Binance node with single command.
+* Works for testnet, prod, or both at once.
 * Small image about 100MB, compared to bigger than 1 GB official repository.
 * Easy updates
 

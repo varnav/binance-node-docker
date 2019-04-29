@@ -40,7 +40,6 @@ RUN chmod +x /usr/local/bin/*.sh \
 && mkdir -p ${BNCHOME} \
 && groupadd bnbchaind \
 && useradd --no-create-home -g bnbchaind bnbchaind \
-&& chown -R bnbchaind:bnbchaind /node-binary/ \
 && chown -R bnbchaind:bnbchaind ${BNCHOME}
 
 VOLUME ${BNCHOME}
