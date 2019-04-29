@@ -3,8 +3,6 @@
 # MIT license
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG HOST_USER_UID=1000
-ARG HOST_USER_GID=1000
 
 # Build stage
 
@@ -23,6 +21,9 @@ RUN upx /node-binary/cli/testnet/${BVER}/linux/tbnbcli \
 # Final stage
 
 FROM ubuntu:18.04
+
+ARG HOST_USER_UID=1000
+ARG HOST_USER_GID=1000
 
 # UPDATE ME when new version is out !!!!
 ENV BVER=0.5.8
