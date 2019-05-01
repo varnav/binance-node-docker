@@ -22,11 +22,14 @@ RUN upx /node-binary/cli/testnet/${BVER}/linux/tbnbcli \
 
 FROM ubuntu:18.04
 
+ARG HOST_USER_UID=1000
+ARG HOST_USER_GID=1000
+
 # UPDATE ME when new version is out !!!!
 ENV BVER=0.5.8
 ENV BNET=testnet
 #ENV BNET=prod
-ENV BNCHOME=/root/.bnbchaind
+ENV BNCHOME=/opt/bnbchaind
 
 COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
 COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
@@ -36,7 +39,12 @@ COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/
 COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
 COPY ./bin/*.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/*.sh
+RUN set -ex \
+&& chmod +x /usr/local/bin/*.sh \
+&& mkdir -p "$BNCHOME" \
+&& groupadd --gid "$HOST_USER_GID" bnbchaind \
+&& useradd --uid "$HOST_USER_UID" --gid "$HOST_USER_GID" --shell /bin/bash --no-create-home bnbchaind \
+&& chown -R bnbchaind:bnbchaind "$BNCHOME"
 
 VOLUME ${BNCHOME}
 
@@ -44,8 +52,5 @@ VOLUME ${BNCHOME}
 # Prometheus is enabled on port 26660 by default, and the endpoint is /metrics.
 
 EXPOSE 27146 27147 26660
-
-HEALTHCHECK --interval=5m --timeout=3s \
-  CMD curl -f localhost:27147/status || exit 1
 
 ENTRYPOINT ["entrypoint.sh"]

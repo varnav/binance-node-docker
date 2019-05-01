@@ -1,5 +1,6 @@
 #!/bin/bash
 
 source setup.sh
-set -ex
-exec /usr/local/bin/bnbchaind start --home ${BNCHOME} --pruning breathe
+echo "Running $0 in $PWD"
+set -ev
+su bnbchaind -c "/usr/local/bin/bnbchaind start --home ${BNCHOME} --pruning breathe"
