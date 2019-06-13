@@ -14,7 +14,7 @@ ARG CLIVER=0.5.8.1
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
-RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
+RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git binutils
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Dirty fix for official repo lack of +x on binaries
