@@ -36,6 +36,8 @@ ARG HOST_USER_GID=1000
 # UPDATE ME when new version is out !!!!
 ENV BVER=0.5.10
 ENV CLIVER=0.5.8.1
+ARG NODETYPE=fullnode
+#ARG NODETYPE=lightnode
 ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/opt/bnbchaind
