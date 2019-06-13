@@ -26,7 +26,7 @@ Don't know what all this is about? Read [newbie guide](https://github.com/varnav
 
 ```
 ufw allow 26656/tcp
-docker run -d --name binance-testnet -v /opt/binance-testnet-data:/opt/bnbchaind -e "BNET=testnet" -p 26656:26656 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node-docker
+docker run -d --name binance-testnet -v /opt/binance-testnet-data:/opt/bnbchaind -e "BNET=testnet" -p 26656:26656 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node-docker
 ```
 
 ### Check logs
@@ -52,7 +52,7 @@ docker run -d --name binance-testnet -v /opt/binance-testnet-data:/opt/bnbchaind
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance -v /opt/binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges varnav/binance-node-docker
+docker run -d --name binance -v /opt/binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node-docker
 ```
 
 You can run both testnet and prod at once, use `-p 27147:27147` for publishing RPC port for one of them.
