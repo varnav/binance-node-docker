@@ -10,13 +10,16 @@ FROM ubuntu:18.04 as builder
 
 # UPDATE ME when new version is out !!!!
 ARG BVER=0.5.10
+ARG CLIVER=0.5.8.1
+ARG NODETYPE=fullnode
+#ARG NODETYPE=lightnode
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
-RUN upx /node-binary/cli/testnet/${BVER}/linux/tbnbcli \
-&& upx /node-binary/cli/prod/${BVER}/linux/bnbcli \
-&& upx /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind \
-&& upx /node-binary/fullnode/prod/${BVER}/linux/bnbchaind
+RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
+&& upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
+&& upx /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
+&& upx /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
 
 # Final stage
 
@@ -27,16 +30,17 @@ ARG HOST_USER_GID=1000
 
 # UPDATE ME when new version is out !!!!
 ENV BVER=0.5.10
+ENV CLIVER=0.5.8.1
 ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/opt/bnbchaind
 
-COPY --from=builder /node-binary/cli/testnet/${BVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
-COPY --from=builder /node-binary/cli/prod/${BVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
-COPY --from=builder /node-binary/fullnode/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
-COPY --from=builder /node-binary/fullnode/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/prod/${BVER}/linux/
-COPY --from=builder /node-binary/fullnode/testnet/${BVER}/config/* /node-binary/fullnode/testnet/${BVER}/config/
-COPY --from=builder /node-binary/fullnode/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
+COPY --from=builder /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/cli/prod/${CLIVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
+COPY --from=builder /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
+COPY --from=builder /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/prod/${BVER}/linux/
+COPY --from=builder /node-binary/${NODETYPE}/testnet/${BVER}/config/* /node-binary/fullnode/testnet/${BVER}/config/
+COPY --from=builder /node-binary/${NODETYPE}/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
 COPY ./bin/*.sh /usr/local/bin/
 
 RUN set -ex \
