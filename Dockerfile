@@ -28,6 +28,9 @@ RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
 # && upx /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
 # && upx /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
 
+RUN strip -S --strip-unneeded --remove-section=.note.gnu.gold-version --remove-section=.comment --remove-section=.note --remove-section=.note.gnu.build-id --remove-section=.note.ABI-tag /node-binary/cli/prod/*/linux/*cli \
+&& strip -S --strip-unneeded --remove-section=.note.gnu.gold-version --remove-section=.comment --remove-section=.note --remove-section=.note.gnu.build-id --remove-section=.note.ABI-tag /node-binary/*/prod/*/linux/bnbchaind
+
 # Final stage
 
 FROM ubuntu:18.04
