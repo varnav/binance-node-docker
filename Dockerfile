@@ -16,15 +16,17 @@ ARG NODETYPE=fullnode
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
+
 # Dirty fix for official repo lack of +x on binaries
 RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
 && chmod +x /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
 && chmod +x /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
 && chmod +x /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
-RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
-&& upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
-&& upx /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
-&& upx /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
+
+# RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
+# && upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
+# && upx /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
+# && upx /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
 
 # Final stage
 
