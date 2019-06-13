@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 FROM ubuntu:18.04 as builder
 
 # UPDATE ME when new version is out !!!!
-ARG BVER=0.5.8
+ARG BVER=0.5.10
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
@@ -26,7 +26,7 @@ ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
 
 # UPDATE ME when new version is out !!!!
-ENV BVER=0.5.8
+ENV BVER=0.5.10
 ENV BNET=testnet
 #ENV BNET=prod
 ENV BNCHOME=/opt/bnbchaind
