@@ -9,8 +9,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 FROM ubuntu:18.04 as builder
 
 # UPDATE ME when new version is out !!!!
-ARG BVER=0.5.10
-ARG CLIVER=0.5.8.1
+ARG BVER=0.6.0
+ARG CLIVER=0.6.0
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
@@ -39,8 +39,8 @@ ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
 
 # UPDATE ME when new version is out !!!!
-ENV BVER=0.5.10
-ENV CLIVER=0.5.8.1
+ENV BVER=0.6.0
+ENV CLIVER=0.6.0
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 ENV BNET=testnet
