@@ -10,9 +10,9 @@ install:
   - chmod 700 ${HADOLINT}
 script:
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
-  - docker build . -t varnav/binance-node-docker
-  - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node-docker
-  - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node-docker
+  - docker build . -t varnav/binance-node
+  - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node
+  - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node
   - sleep 5
   - docker logs binance-testnet | head -n 20
   - docker logs binance | head -n 20
