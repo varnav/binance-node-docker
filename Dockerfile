@@ -1,12 +1,13 @@
+FROM ubuntu:18.04 as builder
+
 # Dockerfile for running Binance node from binary packages under docker
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
 # MIT license
+LABEL Maintainer = "Evgeny Varnavskiy <varnavruz@gmail.com>"
+LABEL Description="Docker image for Binance full and light nodes"
+LABEL License="MIT License"
 
 ARG DEBIAN_FRONTEND=noninteractive
-
-# Build stage
-
-FROM ubuntu:18.04 as builder
 
 # UPDATE ME when new version is out !!!!
 ARG BVER=0.5.10
@@ -14,7 +15,7 @@ ARG CLIVER=0.5.8.1
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
-RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git
+RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git binutils
 RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Dirty fix for official repo lack of +x on binaries

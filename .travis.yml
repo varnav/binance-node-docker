@@ -1,18 +1,16 @@
 # Use container-based infrastructure for quicker build start-up
 sudo: false
-# Use generic image to cut start-up time
-language: generic
+language: minimal
 env:
   # Path to 'hadolint' binary
   HADOLINT: "${HOME}/hadolint"
 install:
   # Download hadolint binary and set it as executable
   - curl -sL -o ${HADOLINT} "https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-$(uname -s)-$(uname -m)"
-    && chmod 700 ${HADOLINT}
+  - chmod 700 ${HADOLINT}
 script:
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
-  - docker pull varnav/binance-node-docker:$TRAVIS_BRANCH || true
-  - docker build --cache-from varnav/binance-node-docker:$TRAVIS_BRANCH . -t varnav/binance-node-docker
+  - docker build . -t varnav/binance-node-docker
   - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node-docker
   - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node-docker
   - sleep 5
