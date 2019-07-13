@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -d "${BNCHOME}/config/" ]; then
 mkdir -p ${BNCHOME}/config/
@@ -9,8 +9,7 @@ fi
 cp /node-binary/fullnode/${BNET}/${BVER}/linux/bnbchaind /usr/local/bin/
 chmod +x /usr/local/bin/bnbchaind
 
-if [ ${BNET} == "testnet" ];
-then
+if [ ${BNET} == "testnet" ]; then
     ln -s /node-binary/cli/${BNET}/${BVER}/linux/tbnbcli /usr/local/bin/tbnbcli
     chmod +x /usr/local/bin/tbnbcli
 else

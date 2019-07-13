@@ -18,7 +18,7 @@ ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git git-lfs binutils
-RUN	git lfs install && git clone --depth 1 https://github.com/binance-chain/node-binary.git
+RUN	git lfs clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Dirty fix for official repo lack of +x on binaries
 RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
