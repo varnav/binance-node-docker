@@ -1,3 +1,6 @@
+# UPDATE ME when new version is out !!!!
+ARG BVER=0.6.0
+ARG CLIVER=0.5.8.1
 FROM ubuntu:18.04 as builder
 
 # Dockerfile for running Binance node from binary packages under docker
@@ -9,14 +12,13 @@ LABEL License="MIT License"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# UPDATE ME when new version is out !!!!
-ARG BVER=0.5.10
-ARG CLIVER=0.5.8.1
+ARG BVER
+ARG CLIVER
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
-RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git binutils
-RUN	git clone --depth 1 https://github.com/binance-chain/node-binary.git
+RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git git-lfs binutils
+RUN	git lfs install && git clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Dirty fix for official repo lack of +x on binaries
 RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
@@ -36,9 +38,10 @@ FROM ubuntu:18.04
 ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
 
-# UPDATE ME when new version is out !!!!
-ENV BVER=0.5.10
-ENV CLIVER=0.5.8.1
+ARG BVER
+ARG CLIVER
+ENV BVER=$BVER
+ENV CLIVER=$CLIVER
 ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 ENV BNET=testnet
