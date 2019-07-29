@@ -1,6 +1,6 @@
 # UPDATE ME when new version is out !!!!
-ARG BVER=0.6.0
-ARG CLIVER=0.5.8.1
+ARG BVER=0.6.1
+ARG CLIVER=0.6.1
 FROM ubuntu:18.04 as builder
 
 # Dockerfile for running Binance node from binary packages under docker
@@ -22,9 +22,9 @@ RUN	git lfs clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Dirty fix for official repo lack of +x on binaries
 RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
-&& chmod +x /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
-&& chmod +x /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
-&& chmod +x /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
+; chmod +x /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
+; chmod +x /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
+; chmod +x /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
 
 # RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
 # && upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
