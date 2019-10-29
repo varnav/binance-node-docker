@@ -11,7 +11,7 @@ Docker image for Binance Full Node
 
 * Spin up full Binance node with single command.
 * Works for testnet, prod, or both at once.
-* Small image about 100MB, compared to bigger than 1 GB official repository.
+* Small image about 100MB, compared to bigger than 6 GB official repository.
 * Easy updates
 
 Don't know what all this is about? Read [newbie guide](https://github.com/varnav/binance-node-docker/blob/master/newbie-guide.md).
@@ -20,7 +20,7 @@ Don't know what all this is about? Read [newbie guide](https://github.com/varnav
 
 ### Run interactively
 
-`docker run --rm -it varnav/binance-node`
+`docker run --rm -it --ulimit nofile=16000:16000 varnav/binance-node`
 
 ### Run as daemon
 
