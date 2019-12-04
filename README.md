@@ -26,19 +26,19 @@ Don't know what all this is about? Read [newbie guide](https://github.com/varnav
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance -v /opt/binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
+docker run -d --name binance-node -v binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
 ```
 
 You can run both testnet and prod at once, use `-p 27147:27147` for publishing RPC port for one of them.
 
 ### Check logs
 
-`docker logs -f binance-testnet`
+`docker logs -f binance-node`
 
 ### CLI access
 
  ```
- docker exec -it binance-devel /bin/bash
+ docker exec -it binance-node /bin/bash
  tbnbcli version
  ```
 
@@ -46,7 +46,7 @@ You can run both testnet and prod at once, use `-p 27147:27147` for publishing R
 
 ### Update
 
-`docker stop binance-testnet && docker rm binance-testnet`, pull fresh image with `docker pull varnav/binance-node` and then run again, data and configs inside `/opt/binance-testnet-data` are preserved.
+`docker stop binance-node && docker rm binance-node`, pull fresh image with `docker pull varnav/binance-node` and then run again, data and configs in the volume `binance-data` are preserved.
 
 ## Devel
 
