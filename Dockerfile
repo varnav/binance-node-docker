@@ -18,13 +18,13 @@ ARG NODETYPE=fullnode
 #ARG NODETYPE=lightnode
 
 RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget unzip binutils
-RUN	wget https://github.com/binance-chain/node-binary/archive/master.zip && unzip *.zip
+RUN	wget -q https://github.com/binance-chain/node-binary/archive/master.zip && unzip *.zip
 
 # Dirty fix for official repo lack of +x on binaries
-RUN chmod +x /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
-; chmod +x /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
-; chmod +x /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
-; chmod +x /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
+RUN chmod +x /node-binary-master/cli/testnet/${CLIVER}/linux/tbnbcli \
+; chmod +x /node-binary-master/cli/prod/${CLIVER}/linux/bnbcli \
+; chmod +x /node-binary-master/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
+; chmod +x /node-binary-master/${NODETYPE}/prod/${BVER}/linux/bnbchaind
 
 # RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
 # && upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
