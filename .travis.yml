@@ -11,7 +11,7 @@ addons:
     update: true
 install:
   # Download hadolint binary and set it as executable
-  - curl -sL -o ${HADOLINT} "https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-$(uname -s)-$(uname -m)"
+  - curl -sL -o ${HADOLINT} "https://github.com/hadolint/hadolint/releases/download/v1.17.3/hadolint-$(uname -s)-$(uname -m)"
   - chmod 700 ${HADOLINT}
 script:
   - sudo lynis --no-colors audit dockerfile Dockerfile
