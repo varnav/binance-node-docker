@@ -6,6 +6,9 @@ env:
   HADOLINT: "${HOME}/hadolint"
 before_install:
   - sudo apt-get -y install lynis
+addons:
+  apt:
+    update: true
 install:
   # Download hadolint binary and set it as executable
   - curl -sL -o ${HADOLINT} "https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-$(uname -s)-$(uname -m)"
