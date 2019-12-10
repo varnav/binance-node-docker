@@ -14,7 +14,7 @@ install:
   - curl -sL -o ${HADOLINT} "https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-$(uname -s)-$(uname -m)"
   - chmod 700 ${HADOLINT}
 script:
-  - sudo lynis audit dockerfile Dockerfile
+  - sudo lynis --no-colors audit dockerfile Dockerfile
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
   - docker build . -t varnav/binance-node
   - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node
