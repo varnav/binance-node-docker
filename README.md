@@ -16,8 +16,6 @@ Docker image for Binance Full Node
 
 Don't know what all this is about? Read [newbie guide](https://github.com/varnav/binance-node-docker/blob/master/newbie-guide.md).
 
-## Testnet
-
 ### Run interactively
 
 `docker run --rm -it --ulimit nofile=16000:16000 varnav/binance-node`
@@ -29,7 +27,7 @@ ufw allow 27146/tcp
 docker run -d --name binance-node -v binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
 ```
 
-You can run both testnet and prod at once, use `-p 27147:27147` for publishing RPC port for one of them.
+You will need different port mapping if running testnet: `-p 26656:26656 -p 26657:26657`
 
 ### Check logs
 
