@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binance-node
+  labels:
+    app: binance-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: binance-node
+  template:
+    metadata:
+      labels:
+        app: binance-node
+    spec:
+      containers:
+      - name: binance-node
+        image: varnav/binance-node
+        ports:
+        - name: binance-rpc
+          containerPort: 27147
+        - name: binance-public
+          containerPort: 27146
+        resources:
+          limits:
+            memory: "1Gi"
+        volumeMounts:
+          - name: binance-data
+            mountPath: /opt/bnbchaind
+      volumes:
+      - name: binance-data

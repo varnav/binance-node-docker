@@ -46,6 +46,10 @@ You will need different port mapping if running testnet: `-p 26656:26656 -p 2665
 
 `docker stop binance-node && docker rm binance-node`, pull fresh image with `docker pull varnav/binance-node` and then run again, data and configs in the volume `binance-data` are preserved.
 
+### Run with kubernetes
+
+`kubectl apply -f .\kubernetes-deployment.yml`
+
 ## Devel
 
 ## Building devel branch locally
