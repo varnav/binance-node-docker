@@ -29,11 +29,11 @@ spec:
         volumeMounts:
           - name: binance-data
             mountPath: /opt/bnbchaind
-        initContainers:
-        - name: init-ulimitn
-          image: busybox
-          command: ["sh", "-c", "ulimit -n 16000"]
-          securityContext:
-            privileged: true
+      initContainers:
+      - name: init-ulimitn
+        image: busybox
+        command: ["sh", "-c", "ulimit -n 16000"]
+        securityContext:
+          privileged: true
       volumes:
       - name: binance-data
