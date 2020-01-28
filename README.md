@@ -50,7 +50,7 @@ You will need different port mapping if running testnet: `-p 26656:26656 -p 2665
 
 ```
 kubectl apply -f .\kubernetes-deployment.yml
-expose deployment binance-node --type LoadBalancer
+kubectl expose deployment binance-node --type LoadBalancer
 ```
 
 ## Devel
