@@ -25,7 +25,7 @@ spec:
         resources:
           limits:
             memory: "4Gi"
-            cpu: 2
+            cpu: "200m"
         volumeMounts:
           - name: binance-data
             mountPath: /opt/bnbchaind
