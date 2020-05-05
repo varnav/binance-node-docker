@@ -1,7 +1,7 @@
 # UPDATE ME when new version is out !!!!
 ARG BVER=0.6.3
 ARG CLIVER=0.6.3
-FROM ubuntu:18.04 as builder
+FROM ubuntu:20.04 as builder
 
 # Dockerfile for running Binance node from binary packages under docker
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
@@ -27,7 +27,7 @@ RUN	git lfs clone --depth 1 https://github.com/binance-chain/node-binary.git
 
 # Final stage
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
