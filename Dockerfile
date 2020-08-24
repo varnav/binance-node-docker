@@ -1,6 +1,6 @@
 # UPDATE ME when new version is out !!!!
-ARG BVER=0.7.2
-ARG CLIVER=0.7.2
+ARG BVER=0.8.0
+ARG CLIVER=0.8.0
 FROM ubuntu:20.04 as builder
 
 # Dockerfile for running Binance node from binary packages under docker
