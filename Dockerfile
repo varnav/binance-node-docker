@@ -27,7 +27,9 @@ RUN set -ex \
 && mkdir -p ${BNCHOME}/config/ \
 && chown -R bnbchaind:bnbchaind "$BNCHOME" \
 && chown -R bnbchaind:bnbchaind ${BNCHOME}/config/ \
-&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget
+&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
 && wget -q https://github.com/binance-chain/node-binary/blob/master/cli/prod/$CLI_LATEST_VERSION/linux/bnbcli \
