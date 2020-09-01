@@ -32,8 +32,9 @@ RUN set -ex \
 && rm -rf /var/lib/apt/lists/*
 
 RUN set -ex \
-&& wget -q https://github.com/binance-chain/node-binary/blob/master/cli/prod/$CLI_LATEST_VERSION/linux/bnbcli \
 && cd /usr/local/bin/ \
+&& wget -q https://github.com/binance-chain/node-binary/blob/master/cli/prod/$CLI_LATEST_VERSION/linux/bnbcli \
+&& chmod 755 "./bnbcli" \
 && FULLNODE_VERSION_PATH="fullnode/prod/$FULLNODE_LATEST_VERSION" \
 && FULLNODE_CONFIG_URL="$GH_REPO_URL/$FULLNODE_VERSION_PATH/config" \
 && FULLNODE_BINARY_URL="$GH_REPO_URL/$FULLNODE_VERSION_PATH/linux/bnbchaind" \
