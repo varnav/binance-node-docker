@@ -25,15 +25,10 @@ script:
   - sudo lynis audit dockerfile Dockerfile --no-colors 
   - ${HADOLINT} --ignore DL3003 --ignore DL3008 Dockerfile
   - docker build . -t varnav/binance-node
-  - docker run --rm -d --name binance-testnet -e "BNET=testnet" varnav/binance-node
-  - docker run --rm -d --name binance -e "BNET=prod" varnav/binance-node
+  - docker run --rm -d --name binance varnav/binance-node
   - sleep 5
-  - docker logs binance-testnet | head -n 20
   - docker logs binance | head -n 20
   - sleep 15
-  - docker logs --tail 20 binance-testnet
   - docker logs --tail 20 binance
-  - docker exec -t binance-testnet tbnbcli version
   - docker exec -t binance bnbcli version
-  - docker stop binance-testnet
   - docker stop binance

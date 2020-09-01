@@ -1,7 +1,4 @@
-# UPDATE ME when new version is out !!!!
-ARG BVER=0.8.0
-ARG CLIVER=0.8.0
-FROM ubuntu:20.04 as builder
+FROM ubuntu:20.04
 
 # Dockerfile for running Binance node from binary packages under docker
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
@@ -12,50 +9,39 @@ LABEL License="MIT License"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG BVER
-ARG CLIVER
-ARG NODETYPE=fullnode
-#ARG NODETYPE=lightnode
-
-RUN apt-get update && apt-get install -y --no-install-recommends upx ca-certificates wget git git-lfs binutils
-RUN	git lfs clone --depth 1 https://github.com/binance-chain/node-binary.git
-
-# RUN upx /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli \
-# && upx /node-binary/cli/prod/${CLIVER}/linux/bnbcli \
-# && upx /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind \
-# && upx /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind
-
-# Final stage
-
-FROM ubuntu:20.04
-
+# UPDATE ME when new version is out !!!!
+ARG CLI_LATEST_VERSION="0.8.0-hotfix"
+ARG FULLNODE_LATEST_VERSION="0.8.0"
+ARG GH_REPO_URL="https://github.com/binance-chain/node-binary/raw/master"
 ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
 
-ARG BVER
-ARG CLIVER
-ENV BVER=$BVER
-ENV CLIVER=$CLIVER
-ARG NODETYPE=fullnode
-#ARG NODETYPE=lightnode
-ENV BNET=testnet
-#ENV BNET=prod
 ENV BNCHOME=/opt/bnbchaind
 
-COPY --from=builder /node-binary/cli/testnet/${CLIVER}/linux/tbnbcli /node-binary/cli/testnet/${BVER}/linux/
-COPY --from=builder /node-binary/cli/prod/${CLIVER}/linux/bnbcli /node-binary/cli/prod/${BVER}/linux/
-COPY --from=builder /node-binary/${NODETYPE}/testnet/${BVER}/linux/bnbchaind /node-binary/fullnode/testnet/${BVER}/linux/
-COPY --from=builder /node-binary/${NODETYPE}/prod/${BVER}/linux/bnbchaind /node-binary/fullnode/prod/${BVER}/linux/
-COPY --from=builder /node-binary/${NODETYPE}/testnet/${BVER}/config/* /node-binary/fullnode/testnet/${BVER}/config/
-COPY --from=builder /node-binary/${NODETYPE}/prod/${BVER}/config/* /node-binary/fullnode/prod/${BVER}/config/
 COPY ./bin/*.sh /usr/local/bin/
 
 RUN set -ex \
 && chmod +x /usr/local/bin/*.sh \
-&& mkdir -p "$BNCHOME" \
 && groupadd --gid "$HOST_USER_GID" bnbchaind \
 && useradd --uid "$HOST_USER_UID" --gid "$HOST_USER_GID" --shell /bin/bash --no-create-home bnbchaind \
-&& chown -R bnbchaind:bnbchaind "$BNCHOME"
+&& mkdir -p ${BNCHOME}/config/ \
+&& chown -R bnbchaind:bnbchaind "$BNCHOME" \
+&& chown -R bnbchaind:bnbchaind ${BNCHOME}/config/ \
+&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget
+
+RUN set -ex \
+&& wget -q https://github.com/binance-chain/node-binary/blob/master/cli/prod/$CLI_LATEST_VERSION/linux/bnbcli \
+&& cd /usr/local/bin/ \
+&& FULLNODE_VERSION_PATH="fullnode/prod/$FULLNODE_LATEST_VERSION" \
+&& FULLNODE_CONFIG_URL="$GH_REPO_URL/$FULLNODE_VERSION_PATH/config" \
+&& FULLNODE_BINARY_URL="$GH_REPO_URL/$FULLNODE_VERSION_PATH/linux/bnbchaind" \
+&& wget -q "$FULLNODE_BINARY_URL" \
+&& chmod 755 "./bnbchaind" \
+&& cd ${BNCHOME}/config/ \
+&& wget -q "$FULLNODE_CONFIG_URL/app.toml" \
+&& wget -q "$FULLNODE_CONFIG_URL/config.toml" \
+&& wget -q "$FULLNODE_CONFIG_URL/genesis.json" \
+&& sed -i 's/logToConsole = false/logToConsole = true/g' ${BNCHOME}/config/app.toml
 
 VOLUME ${BNCHOME}
 

@@ -10,7 +10,6 @@ Docker image for Binance Full Node
 ### Features:
 
 * Spin up full Binance node with single command.
-* Works for testnet, prod, or both at once.
 * Small image about 100MB, compared to bigger than 6 GB official repository.
 * Easy updates
 
@@ -24,10 +23,8 @@ Don't know what all this is about? Read [newbie guide](https://github.com/varnav
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance-node -v binance-data:/opt/bnbchaind -e "BNET=prod" -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
+docker run -d --name binance-node -v binance-data:/opt/bnbchaind -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
 ```
-
-You will need different port mapping if running testnet: `-p 26656:26656 -p 26657:26657`
 
 ### Check logs
 
@@ -37,10 +34,8 @@ You will need different port mapping if running testnet: `-p 26656:26656 -p 2665
 
  ```
  docker exec -it binance-node /bin/bash
- tbnbcli version
+ bnbcli version
  ```
-
- use `tbnbcli` for testnet and `bnbcli` for prod
 
 ### Update
 
@@ -55,17 +50,17 @@ kubectl expose deployment binance-node --type LoadBalancer
 
 ## Devel
 
-## Building devel branch locally
+## Building locally
 
 ```
-git clone --branch=devel https://github.com/varnav/binance-node-docker.git
-cd binance-node-docker && docker build . -t varnav/binance-node:devel
+git clone https://github.com/varnav/binance-node-docker.git
+cd binance-node-docker && docker build . -t varnav/binance-node
 ```
 
 ### Run and get access to CLI
 
 ```
-docker run --rm -d --name binance-devel varnav/binance-node:devel
-docker exec -it binance-devel /bin/bash
-tbnbcli version
+docker run --rm -d --name binance-node varnav/binance-node
+docker exec -it binance-node /bin/bash
+bnbcli version
 ```
