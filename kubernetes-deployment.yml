@@ -28,7 +28,7 @@ spec:
             cpu: "200m"
         volumeMounts:
           - name: binance-data
-            mountPath: /opt/bnbchaind
+            mountPath: /home/bnbchaind/.bnbchaind
       initContainers:
       - name: init-ulimitn
         image: busybox

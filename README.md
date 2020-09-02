@@ -23,7 +23,7 @@ Don't know what all this is about? Read [newbie guide](https://github.com/varnav
 
 ```
 ufw allow 27146/tcp
-docker run -d --name binance-node -v binance-data:/opt/bnbchaind -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
+docker run -d --name binance-node -p 27146:27146 -p 27147:27147 -p 26660:26660 --restart unless-stopped --security-opt no-new-privileges --ulimit nofile=16000:16000 varnav/binance-node
 ```
 
 ### Check logs
