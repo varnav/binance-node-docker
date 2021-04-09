@@ -10,8 +10,8 @@ LABEL License="MIT License"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # UPDATE ME when new version is out !!!!
-ARG CLI_LATEST_VERSION="0.8.0-hotfix"
-ARG FULLNODE_LATEST_VERSION="0.8.0"
+ARG CLI_LATEST_VERSION="0.8.2"
+ARG FULLNODE_LATEST_VERSION="0.8.2"
 ARG GH_REPO_URL="https://github.com/binance-chain/node-binary/raw/master"
 ARG FULLNODE_VERSION_PATH="fullnode/prod/${FULLNODE_LATEST_VERSION}"
 ARG HOST_USER_UID=1000
