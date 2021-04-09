@@ -1,6 +1,6 @@
 # binance-node-docker
 
-[![Test status](https://api.travis-ci.org/varnav/binance-node-docker.svg?branch=master)](https://travis-ci.org/varnav/binance-node-docker) [![Docker Pulls](https://img.shields.io/docker/pulls/varnav/binance-node.svg)](https://hub.docker.com/r/varnav/binance-node) [![](https://images.microbadger.com/badges/image/varnav/binance-node.svg)](https://microbadger.com/images/varnav/binance-node "Image details") [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT/)
+[![Test status](https://api.travis-ci.org/varnav/binance-node-docker.svg?branch=master)](https://travis-ci.org/varnav/binance-node-docker) [![Docker Pulls](https://img.shields.io/docker/pulls/varnav/binance-node.svg)](https://hub.docker.com/r/varnav/binance-node) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT/)
 
 [Binance full node docs](https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain)  
 [Binance full node repo](https://github.com/binance-chain/node-binary)
