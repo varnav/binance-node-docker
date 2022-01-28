@@ -10,10 +10,12 @@ LABEL License="MIT License"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # UPDATE ME when new version is out !!!!
-ARG CLI_LATEST_VERSION="0.8.2"
-ARG FULLNODE_LATEST_VERSION="0.8.2"
+ARG CLI_LATEST_VERSION="0.8.3"
+ARG FULLNODE_LATEST_VERSION="0.8.3"
+ARG CONFIG_LATEST_VERSION="0.8.2"
 ARG GH_REPO_URL="https://github.com/binance-chain/node-binary/raw/master"
 ARG FULLNODE_VERSION_PATH="fullnode/prod/${FULLNODE_LATEST_VERSION}"
+ARG CONFIG_VERSION_PATH="fullnode/prod/${CONFIG_LATEST_VERSION}"
 ARG HOST_USER_UID=1000
 ARG HOST_USER_GID=1000
 
@@ -35,7 +37,7 @@ USER bnbchaind
 RUN set -ex \
 && mkdir -p /home/bnbchaind/.bnbchaind/config \
 && cd /home/bnbchaind/.bnbchaind/config \
-&& FULLNODE_CONFIG_URL="$GH_REPO_URL/$FULLNODE_VERSION_PATH/config" \
+&& FULLNODE_CONFIG_URL="$GH_REPO_URL/$CONFIG_VERSION_PATH/config" \
 && wget -q "$FULLNODE_CONFIG_URL/app.toml" \
 && wget -q "$FULLNODE_CONFIG_URL/config.toml" \
 && wget -q "$FULLNODE_CONFIG_URL/genesis.json" \
