@@ -3,9 +3,10 @@ FROM ubuntu:20.04
 # Dockerfile for running Binance node from binary packages under docker
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
 # MIT license
-LABEL Maintainer = "Evgeny Varnavskiy <varnavruz@gmail.com>"
-LABEL Description="Docker image for Binance full and light nodes"
-LABEL License="MIT License"
+LABEL org.opencontainers.image.authors="Evgeny Varnavskiy <varnavruz@gmail.com>"
+LABEL org.opencontainers.image.description="Docker image for Binance full and light nodes"
+LABEL org.opencontainers.image.licenses="MIT License"
+LABEL org.opencontainers.image.url="https://github.com/varnav/binance-node-docker"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
