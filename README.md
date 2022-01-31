@@ -48,6 +48,12 @@ kubectl apply -f .\kubernetes-deployment.yml
 kubectl expose deployment binance-node --type LoadBalancer
 ```
 
+## Notes
+
+### Initial seed data
+
+It will be faster to download data snapshot from [here](https://docs.binance.org/guides/node/snapshot.html) to speed up initial sync.
+
 ## Devel
 
 ## Building locally
