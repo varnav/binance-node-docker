@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Dockerfile for running Binance node from binary packages under docker
 # https://docs.binance.org/fullnode.html#run-full-node-to-join-binance-chain
@@ -11,9 +11,9 @@ LABEL org.opencontainers.image.url="https://github.com/varnav/binance-node-docke
 ARG DEBIAN_FRONTEND=noninteractive
 
 # UPDATE ME when new version is out !!!!
-ARG CLI_LATEST_VERSION="0.8.3"
-ARG FULLNODE_LATEST_VERSION="0.8.3"
-ARG CONFIG_LATEST_VERSION="0.8.2"
+ARG CLI_LATEST_VERSION="0.9.0"
+ARG FULLNODE_LATEST_VERSION="0.9.0"
+ARG CONFIG_LATEST_VERSION="0.9.0"
 ARG GH_REPO_URL="https://github.com/binance-chain/node-binary/raw/master"
 ARG FULLNODE_VERSION_PATH="fullnode/prod/${FULLNODE_LATEST_VERSION}"
 ARG CONFIG_VERSION_PATH="fullnode/prod/${CONFIG_LATEST_VERSION}"

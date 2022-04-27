@@ -63,6 +63,10 @@ git clone https://github.com/varnav/binance-node-docker.git
 cd binance-node-docker && docker build . -t varnav/binance-node
 ```
 
+### Test run
+
+docker run --rm -it varnav/binance-node
+
 ### Run and get access to CLI
 
 ```
